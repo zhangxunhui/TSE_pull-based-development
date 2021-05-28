@@ -1,0 +1,4 @@
+mysql:
+  user: "your db username"
+  passwd: "your db password"
+  db: "your database name"
