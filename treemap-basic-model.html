@@ -1,0 +1,549 @@
+<!--
+    THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/en/editor.html?c=treemap-show-parent
+-->
+<!DOCTYPE html>
+<html style="height: 100%">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body style="height: 100%; margin: 0">
+        <div id="container" style="height: 100%"></div>
+
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js"></script>
+        <!-- Uncomment this line if you want to dataTool extension
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/extension/dataTool.min.js"></script>
+        -->
+        <!-- Uncomment this line if you want to use gl extension
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+        -->
+        <!-- Uncomment this line if you want to echarts-stat extension
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+        -->
+        <!-- Uncomment this line if you want to use map
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/map/js/china.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/map/js/world.js"></script>
+        -->
+        <!-- Uncomment these two lines if you want to use bmap extension
+        <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=<Your Key Here>"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@{{version}}/dist/extension/bmap.min.js"></script>
+        -->
+
+        <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+
+var option;
+
+var ROOT_PATH = 'https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/examples'
+
+myChart.showLoading();
+
+$.get(ROOT_PATH + '/data/asset/data/disk.tree.json', function (diskData) {
+  diskData = [
+    {
+      value: 52.28,
+      name: 'developer',
+      path: 'percentage',
+      children: [
+        {
+          value: 31.17,
+          name: 'same_user',
+          path: 'same_user',
+          itemStyle: {
+            color: 'rgba(178, 34, 34, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 13.53,
+          name: 'prior_review_num',
+          path: 'prior_review_num',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 5.29,
+          name: 'core_member',
+          path: 'core_member',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.73,
+          name: 'prev_pullreqs',
+          path: 'prev_pullreqs',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.41,
+          name: 'account_creation_days',
+          path: 'account_creation_days',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.36,
+          name: 'first_pr',
+          path: 'first_pr',
+          itemStyle: {
+            color: 'rgba(178, 34, 34, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.24,
+          name: 'contrib_open',
+          path: 'contrib_open',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.21,
+          name: 'inte_open',
+          path: 'inte_open',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.12,
+          name: 'followers',
+          path: 'followers',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.07,
+          name: 'contrib_cons',
+          path: 'contrib_cons',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.05,
+          name: 'contrib_gender',
+          path: 'contrib_gender',
+          itemStyle: {
+            color: 'rgba(178, 34, 34, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.02,
+          name: 'contrib_agree',
+          path: 'contrib_agree',
+          itemStyle: {
+            color: 'rgba(178, 34, 34, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.02,
+          name: 'contrib_extra',
+          path: 'contrib_extra',
+          itemStyle: {
+            color: 'rgba(178, 34, 34, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.02,
+          name: 'contrib_neur',
+          path: 'contrib_neur',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.02,
+          name: 'inte_neur',
+          path: 'inte_neur',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.01,
+          name: 'inte_agree',
+          path: 'inte_agree',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.01,
+          name: 'inte_extra',
+          path: 'inte_extra',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        }
+      ]
+    },
+    {
+      value: 46.510000000000005,
+      name: 'pull request',
+      path: 'percentage',
+      children: [
+        {
+          value: 21.1,
+          name: 'lifetime_minutes',
+          path: 'lifetime_minutes',
+          itemStyle: {
+            color: 'rgba(178, 34, 34, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 11.97,
+          name: 'has_comments',
+          path: 'has_comments',
+          itemStyle: {
+            color: 'rgba(178, 34, 34, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 4.49,
+          name: 'num_commits',
+          path: 'num_commits',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 3.76,
+          name: 'other_comment',
+          path: 'other_comment',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 1.47,
+          name: 'ci_exists',
+          path: 'ci_exists',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 1.36,
+          name: 'hash_tag',
+          path: 'hash_tag',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.74,
+          name: 'files_added',
+          path: 'files_added',
+          itemStyle: {
+            color: 'rgba(178, 34, 34, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.59,
+          name: 'commits_on_files_touched',
+          path: 'commits_on_files_touched',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.27,
+          name: 'test_churn',
+          path: 'test_churn',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.26,
+          name: 'files_changed',
+          path: 'files_changed',
+          itemStyle: {
+            color: 'rgba(178, 34, 34, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.25,
+          name: 'reopen_or_not',
+          path: 'reopen_or_not',
+          itemStyle: {
+            color: 'rgba(178, 34, 34, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.17,
+          name: 'description_length',
+          path: 'description_length',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.03,
+          name: 'files_deleted',
+          path: 'files_deleted',
+          itemStyle: {
+            color: 'rgba(178, 34, 34, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.02,
+          name: 'num_comments',
+          path: 'num_comments',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.01,
+          name: 'comment_conflict',
+          path: 'comment_conflict',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.01,
+          name: 'friday_effect',
+          path: 'friday_effect',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.01,
+          name: 'test_inclusion',
+          path: 'test_inclusion',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        }
+      ]
+    },
+    {
+      value: 1.21,
+      name: 'project',
+      path: 'percentage',
+      children: [
+        {
+          value: 0.47,
+          name: 'open_pr_num',
+          path: 'open_pr_num',
+          itemStyle: {
+            color: 'rgba(178, 34, 34, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.26,
+          name: 'project_age',
+          path: 'project_age',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.22,
+          name: 'stars',
+          path: 'stars',
+          itemStyle: {
+            color: 'rgba(178, 34, 34, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.15,
+          name: 'pushed_delta',
+          path: 'pushed_delta',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.06,
+          name: 'team_size',
+          path: 'team_size',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.03,
+          name: 'pr_succ_rate',
+          path: 'pr_succ_rate',
+          itemStyle: {
+            color: 'rgba(178, 34, 34, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.01,
+          name: 'open_issue_num',
+          path: 'open_issue_num',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        },
+        {
+          value: 0.01,
+          name: 'sloc',
+          path: 'sloc',
+          itemStyle: {
+            color: 'rgba(61, 89, 171, 0.6)',
+            borderColorSaturation: 0.6
+          }
+        }
+      ]
+    }
+  ];
+
+  myChart.hideLoading();
+
+  function colorMappingChange(value) {
+    var levelOption = getLevelOption(value);
+    chart.setOption({
+      series: [
+        {
+          levels: levelOption
+        }
+      ]
+    });
+  }
+
+  var formatUtil = echarts.format;
+
+  function getLevelOption() {
+    return [
+      {
+        itemStyle: {
+          borderColor: '#777',
+          borderWidth: 0,
+          gapWidth: 1
+        },
+        upperLabel: {
+          show: false
+        }
+      },
+      {
+        itemStyle: {
+          borderColor: '#555',
+          borderWidth: 5,
+          gapWidth: 1
+        },
+        emphasis: {
+          itemStyle: {
+            borderColor: '#ddd'
+          }
+        }
+      },
+      {
+        colorSaturation: [0.35, 0.5],
+        itemStyle: {
+          borderWidth: 5,
+          gapWidth: 1,
+          borderColorSaturation: 0.6
+        }
+      }
+    ];
+  }
+  myChart.setOption(
+    (option = {
+      title: {
+        text: 'Factor Importance',
+        left: 'center'
+      },
+      tooltip: {
+        formatter: function (info) {
+          var value = info.value;
+          var treePathInfo = info.treePathInfo;
+          var treePath = [];
+          for (var i = 1; i < treePathInfo.length; i++) {
+            treePath.push(treePathInfo[i].name);
+          }
+          return [
+            '<div class="tooltip-title">' +
+              echarts.format.encodeHTML(treePath.join('/')) +
+              '</div>',
+            'Variance Explained: ' + echarts.format.addCommas(value) + '%'
+          ].join('');
+        }
+      },
+      series: [
+        {
+          name: 'Factor category',
+          type: 'treemap',
+          visibleMin: 300,
+          label: {
+            show: true,
+            formatter: '{b}'
+          },
+          upperLabel: {
+            show: true,
+            height: 30
+          },
+          itemStyle: {
+            borderColor: '#fff'
+          },
+          levels: getLevelOption(),
+          data: diskData
+        }
+      ]
+    })
+  );
+});
+
+
+if (option && typeof option === 'object') {
+    myChart.setOption(option);
+}
+
+        </script>
+    </body>
+</html>
+    
