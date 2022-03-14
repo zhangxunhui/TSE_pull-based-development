@@ -3,7 +3,6 @@
 
 2. technical_report.pdf include the experiment results that are not presented in the paper.
 
-
 3. RQ1_basic_model.R is the R script for building mixed-effect logistic regression model for basic model in RQ1.
 
 4. RQ1_special_cases.R is the R script for building mixed-effect logistic regression models for special cases in RQ1, including has_comments=1, contrib_comment=1, inte_comment=1, same_user=0 and ci_exists=1
@@ -27,3 +26,5 @@
 13. different_periods_common_proj_ids.csv is the list of project id for the analysis of RQ2_different_periods.
 
 14. config.yaml.example is a template, and you need to create file config.yaml similar to the template.
+
+15. mcr_papers.xlsx is the file containing all extra papers related to "modern code review". Column `related` means whether the papers is related to patch decision, `note` shows the note that we take while filtering papers, `snowballing` presents the papers that are found during the backward snowballing process, `factors & results` means the factors and results extracted from the papers if related.
